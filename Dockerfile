@@ -1,6 +1,7 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
+FROM  maven:3-jdk-8
+WORKDIR /Zuul
+COPY . .
+RUN mvn clean install
 EXPOSE 8765
-ARG JAR_FILE=target/zuul-1.0-SNAPSHOT.jar
-ADD ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+
+CMD mvn spring-boot:run
